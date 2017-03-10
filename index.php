@@ -1,19 +1,22 @@
-    <?php
-        $db_host = "am1shyeyqbxzy8gc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
-        $db_name = "oeuqkddmrgiuzqck";
-        $db_user = "i0bi71u3ms2d2x38";
-        $db_password = "sh5mrnuikcdrz6eh";
-    
-      $connection = mysqli_connect('am1shyeyqbxzy8gc.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', 'i0bi71u3ms2d2x38', 'sh5mrnuikcdrz6eh');
-    
-     mysqli_select_db($connection, $db_name) or die("Error al seleccionar la base de datos:".mysqli_error());
-    @mysqli_query("SET NAMES 'utf8'");
+  <?php
+$db_name = "lhgjmfsupyod65vz";
+$connection = mysqli_connect('jnc6n3xpbgc3kek2.chr7pe7iynqr.eu-west-1.rds.amazonaws.com', 'exievz51r0py9g1v', 'rt3q65w92v53w29q');
+mysqli_select_db($connection,$db_name) or die("Error al seleccionar la base de datos:".mysqli_error());
 
-    $sql_query = "SELECT * FROM productos";
-    $result = mysqli_query($connection, $sql_query);
-    $rows = array();
+//mysql_select_db("lhgjmfsupyod65vz") or die("Error al seleccionar la base de datos:".mysql_error());
+@mysqli_query("SET NAMES 'utf8'");
+
+if(isset($_POST["id_producto"])){
+
+$id_contacto = $_POST["id_producto"];
+$sql_query = "SELECT * FROM productos WHERE id_producto=$id_producto;";
+$result = mysqli_query($connection,$sql_query);
+$rows = array();
 while($r = mysqli_fetch_assoc($result)) {
-  $rows[] = $r;
+$rows[] = $r;
 }
 print json_encode($rows);
+}else
+echo "No existe el contacto";
+mysqli_close($connection);
 ?>
